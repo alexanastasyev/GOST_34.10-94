@@ -65,7 +65,7 @@ class GOSTSignature {
         if(h.mod(q).equals(BigInteger.ZERO)) {
             h = BigInteger.ONE;
         }
-        BigInteger v = h.modPow(q.subtract(BigInteger.TWO), q);
+        BigInteger v = h.modPow(q.subtract(BigInteger.valueOf(2)), q);
         BigInteger z1 = s.multiply(v).mod(q);
         BigInteger z2 = q.subtract(r).multiply(v).mod(q);
         BigInteger u = a.modPow(z1, p).multiply(y.modPow(z2, p)).mod(p).mod(q);

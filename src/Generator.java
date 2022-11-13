@@ -38,32 +38,32 @@ class Generator {
                     long[] y = generator.rand().limit(r).toArray();
                     BigInteger sum = BigInteger.ZERO;
                     for (int i = 0; i < r - 1; i++) {
-                        BigInteger tmp = BigInteger.valueOf(y[i]).multiply(BigInteger.TWO.pow(32));
+                        BigInteger tmp = BigInteger.valueOf(y[i]).multiply(BigInteger.valueOf(2).pow(32));
                         sum = sum.add(tmp);
                     }
                     sum = sum.add(BigInteger.valueOf(generator.getSeed()));
                     generator.setSeed(y[r - 1]);
-                    BigInteger tmp1 = new BigDecimal(BigInteger.TWO.pow(t.get(m) - 1))
+                    BigInteger tmp1 = new BigDecimal(BigInteger.valueOf(2).pow(t.get(m) - 1))
                             .divide(new BigDecimal(primes[m + 1]), 0, RoundingMode.CEILING)
                             .toBigInteger();
-                    BigInteger tmp2 = new BigDecimal(BigInteger.TWO.pow(t.get(m) - 1).multiply(sum))
-                            .divide(new BigDecimal(primes[m + 1].multiply(BigInteger.TWO.pow(32 * r))), 0, RoundingMode.FLOOR)
+                    BigInteger tmp2 = new BigDecimal(BigInteger.valueOf(2).pow(t.get(m) - 1).multiply(sum))
+                            .divide(new BigDecimal(primes[m + 1].multiply(BigInteger.valueOf(2).pow(32 * r))), 0, RoundingMode.FLOOR)
                             .toBigInteger();
                     n = tmp1.add(tmp2);
-                    if (!(n.mod(BigInteger.TWO).equals(BigInteger.ZERO))) {
+                    if (!(n.mod(BigInteger.valueOf(2)).equals(BigInteger.ZERO))) {
                         n = n.add(BigInteger.ONE);
                     }
                     k = BigInteger.ZERO;
                 }
                 primes[m] = primes[m + 1].multiply(n.add(k)).add(BigInteger.ONE);
-                if(primes[m].compareTo(BigInteger.TWO.pow(t.get(m))) > 0) {
+                if(primes[m].compareTo(BigInteger.valueOf(2).pow(t.get(m))) > 0) {
                     flag = true;
                     continue;
                 }
-                if(!(BigInteger.TWO.modPow(primes[m + 1].multiply(n.add(k)), primes[m]).equals(BigInteger.ONE))
-                        || BigInteger.TWO.modPow(n.add(k), primes[m]).equals(BigInteger.ONE)) {
+                if(!(BigInteger.valueOf(2).modPow(primes[m + 1].multiply(n.add(k)), primes[m]).equals(BigInteger.ONE))
+                        || BigInteger.valueOf(2).modPow(n.add(k), primes[m]).equals(BigInteger.ONE)) {
                     flag = false;
-                    k = k.add(BigInteger.TWO);
+                    k = k.add(BigInteger.valueOf(2));
                 } else {
                     flag = true;
                     break;
@@ -88,32 +88,32 @@ class Generator {
                 long[] y = generator.rand().limit(yLength).toArray();
                 BigInteger sum = BigInteger.ZERO;
                 for (int i = 0; i < y.length - 1; i++) {
-                    BigInteger tmp = BigInteger.valueOf(y[i]).multiply(BigInteger.TWO.pow(32));
+                    BigInteger tmp = BigInteger.valueOf(y[i]).multiply(BigInteger.valueOf(2).pow(32));
                     sum = sum.add(tmp);
                 }
                 sum = sum.add(BigInteger.valueOf(generator.getSeed()));
                 generator.setSeed(y[y.length - 1]);
-                BigInteger tmp1 = new BigDecimal(BigInteger.TWO.pow(bitLength - 1))
+                BigInteger tmp1 = new BigDecimal(BigInteger.valueOf(2).pow(bitLength - 1))
                         .divide(new BigDecimal(q.multiply(Q)), 0, RoundingMode.CEILING)
                         .toBigInteger();
-                BigInteger tmp2 = new BigDecimal(BigInteger.TWO.pow(bitLength - 1).multiply(sum))
-                        .divide(new BigDecimal(q.multiply(Q).multiply(BigInteger.TWO.pow(bitLength))), 0, RoundingMode.FLOOR)
+                BigInteger tmp2 = new BigDecimal(BigInteger.valueOf(2).pow(bitLength - 1).multiply(sum))
+                        .divide(new BigDecimal(q.multiply(Q).multiply(BigInteger.valueOf(2).pow(bitLength))), 0, RoundingMode.FLOOR)
                         .toBigInteger();
                 n = tmp1.add(tmp2);
-                if (!(n.mod(BigInteger.TWO).equals(BigInteger.ZERO))) {
+                if (!(n.mod(BigInteger.valueOf(2)).equals(BigInteger.ZERO))) {
                     n = n.add(BigInteger.ONE);
                 }
                 k = BigInteger.ZERO;
             }
             p = q.multiply(Q).multiply(n.add(k)).add(BigInteger.ONE);
-            if(p.compareTo(BigInteger.TWO.pow(bitLength)) > 0) {
+            if(p.compareTo(BigInteger.valueOf(2).pow(bitLength)) > 0) {
                 flag = true;
                 continue;
             }
-            if(!(BigInteger.TWO.modPow(q.multiply(Q).multiply(n.add(k)), p).equals(BigInteger.ONE))
-                    || BigInteger.TWO.modPow(q.multiply(n.add(k)), p).equals(BigInteger.ONE)) {
+            if(!(BigInteger.valueOf(2).modPow(q.multiply(Q).multiply(n.add(k)), p).equals(BigInteger.ONE))
+                    || BigInteger.valueOf(2).modPow(q.multiply(n.add(k)), p).equals(BigInteger.ONE)) {
                 flag = false;
-                k = k.add(BigInteger.TWO);
+                k = k.add(BigInteger.valueOf(2));
             } else {
                 break;
             }
